@@ -5,11 +5,10 @@
 class String
 {
 public:
+	
 	String();
 	String(const char* _str);
-
-	String(const String& _other);
-
+	String(const String& other);
 	~String();
 
 public:
