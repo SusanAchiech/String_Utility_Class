@@ -31,10 +31,24 @@ public:
 	}
 
 public:
-	size_t Length() const;
-	char& CharacterAt(size_t _index);
-	const char& CharacterAt(size_t _index) const;
+	//returning the length of the string stored
+	size_t Length() const {
+		return s_length;
+	}
 
+	//returning index of character in string
+	char& CharacterAt(size_t _index)
+	{
+		//checking if the index is out of bounds
+		if (index >= 0 && index < s_length)
+		{
+			return s_data[index];
+		}
+		return s_data[0];
+	}
+
+	const char& CharacterAt(size_t _index) const;
+	s
 	bool EqualTo(const String& _other) const;
 
 	String& Append(const String& _str);
