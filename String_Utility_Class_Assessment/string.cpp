@@ -104,7 +104,6 @@ public:
 		return m_data;
 	}
 
-
 	String& ToLower();
 	String& ToUpper();
 
