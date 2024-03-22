@@ -158,7 +158,32 @@ public:
 		return -1;
 	}
 
-	String& Replace(const String& _find, const String& _replace);
+	String& Replace(const String& find, const String& replace)
+	{
+		size_t pos = 0;
+		//creating a new string
+		String result;
+
+		while (pos < s_length) 
+		{
+			size_t foundPos = Find(pos, find);
+
+			if (foundPos == -1) 
+			{
+				result.Append(*this, pos, s_length - pos);
+				break;
+			}
+			//appending the r5elace string and updating the position
+			result.Append(*this, pos, foundPos - pos);
+			
+			result.Append(replace);
+
+			pos = foundPos + find.s_length;
+		}
+		*this = result;
+
+		return *this;
+	}
 
 	String& ReadFromConsole();
 	String& WriteToConsole();
