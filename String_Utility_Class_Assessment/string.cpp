@@ -103,12 +103,60 @@ public:
 	const char* CStr() const {
 		return m_data;
 	}
+	//converting all characters in the string to lowercase
+	String& ToLower()
+	{
+		for (size_t i = 0; i < s_length; i++)
+		{
+			s_data[i] = std::tolower(s_data[i]);
+		}
+		return *this;
+	}
 
-	String& ToLower();
-	String& ToUpper();
+	//converting all characters in the string to uppercase
+	String& ToUpper()
+	{
+		{
+			for (size_t i = 0; i < s_length; i++)
+			{
+				s_data[i] = std::toupper(s_data[i]);
+			}
+			return *this;
+		}
+	}
 
-	size_t Find(const String& _str);
-	size_t Find(size_t _startIndex, const String& _str);
+	//searching for the first occurence of the string
+	size_t Find(const String& str) 
+		{
+
+		char* found = std::strstr(s_data, str.s_data);
+		//returning the index position if found
+		if (found) 
+		{
+			return found - s_data;
+		}
+		//if not found
+		return -1;
+	}
+
+
+	//searching for the first occurence of str within the string object
+
+	size_t Find(size_t startIndex, const String& str) 
+	{
+		if (startIndex >= s_length) 
+		{
+			return -1;
+		}
+		char* found = std::strstr(s_data + startIndex, str.s_data);
+		//returning the index of the starting position
+		if (found) 
+		{
+			return found - s_data;
+		}
+		//if not found
+		return -1;
+	}
 
 	String& Replace(const String& _find, const String& _replace);
 
