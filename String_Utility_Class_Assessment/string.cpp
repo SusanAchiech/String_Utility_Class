@@ -185,12 +185,39 @@ public:
 		return *this;
 	}
 
-	String& ReadFromConsole();
-	String& WriteToConsole();
+	String& ReadFromConsole()
+	{
+		//reading to line 1023
+		char buffer[1024];
 
+		std::cin.getline(buffer, 1024);
+		//storing input in a temporary buffer 
+		*this = String(buffer);
+
+		return *this;
+
+	}
+
+	String& WriteToConsole() 
+	{
+		//allowing input into the console
+		std::cout << m_data << std::endl;
+
+		return *this;
+	}
 public:
-	bool operator==(const String& _other);
-	bool operator!=(const String& _other);
+	//comparing the current string with the other string
+	bool operator==(const String& other) 
+	
+	{
+		return EqualTo(other);
+	}
+
+	//returning the opposite of EqualTo()
+	bool operator!=(const String& other) 
+	{
+		return !EqualTo(other);
+	}
 
 	String& operator=(const String& _str);
 
