@@ -47,20 +47,63 @@ public:
 		return s_data[0];
 	}
 
+	//returning the index of the chtracter in the string 
 	const char& CharacterAt(size_t _index) const
 	{
+		//checking if the index is valid
 		if (index >= 0 && index < s_length)
 		{
 			return s_data[index]
 		}
+		//if out of bounds then return 0
 		return s_data[0];
 	}
-	bool EqualTo(const String& _other) const;
 
-	String& Append(const String& _str);
-	String& Prepend(const String& _str);
+	//comparing the two string objects
+	bool EqualTo(const String& _other) const
+	{
+		return std::strcmp(s_data, other.s_data) == 0;
+	}
 
-	const char* CStr() const;
+	//appending the string data from str to current string
+	String& Append(const String& str) {
+		//creating a new character
+		char* temp = new char[s_length + str.s_length + 1];
+		//copying the current string data into temp
+		std::strcpy(temp, s_data);
+		//appending the str
+		std::strcat(temp, str.s_data);
+		//dellocating the old s_data
+		delete[] s_data;
+		//updating s_data to point to temp
+		s_data = temp;
+		//updating s_data to reflect new length
+		s_length += str.s_length;
+		//returning the modified string
+		return *this;
+	}
+	String& Prepend(const String& _str)
+	{
+		//creating a new character
+		char* temp = new char[m_length + str.m_length + 1];
+		//copying the str data into temp
+		std::strcpy(temp, str.m_data);
+		//updating s_data to reflect new length
+		std::strcat(temp, m_data);
+		//creating a new character
+		delete[] m_data;
+		//updating s_data to reflect new length
+		m_data = temp;
+		//updating s_data to reflect new length
+		m_length += str.m_length;
+		//returning the modified string
+		return *this;
+	}
+
+	const char* CStr() const {
+		return m_data;
+	}
+
 
 	String& ToLower();
 	String& ToUpper();
