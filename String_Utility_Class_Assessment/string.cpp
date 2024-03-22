@@ -47,8 +47,14 @@ public:
 		return s_data[0];
 	}
 
-	const char& CharacterAt(size_t _index) const;
-	s
+	const char& CharacterAt(size_t _index) const
+	{
+		if (index >= 0 && index < s_length)
+		{
+			return s_data[index]
+		}
+		return s_data[0];
+	}
 	bool EqualTo(const String& _other) const;
 
 	String& Append(const String& _str);
