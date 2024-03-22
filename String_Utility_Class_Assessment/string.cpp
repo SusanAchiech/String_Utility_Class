@@ -219,10 +219,32 @@ public:
 		return !EqualTo(other);
 	}
 
-	String& operator=(const String& _str);
+	String& operator=(const String& str)
+	{
+		//checking if this and str are not the same object
+		if (this != &str) 
+		{
+			//if not then dellocating s_data
+			delete[] s_data;
+			//updating s_length  with str length
+			s_length = str.s_length;
+			s_data = new char[s_length + 1];
+			//coping string data cfrom str.s_data to m_data
+			std::strcpy(s_data, str.s_data);
+		}
+		return *this;
+	}
 
-	char& operator[](size_t _index);
-	const char& operator[](size_t _index) const;
+	//returning const reference to the character
+	char& operator[](size_t index)
+	{
+		return CharacterAt(index);
+	}
+
+	const char& operator[](size_t index) const
+	{
+		return CharacterAt(index);
+	}
 
 private:
 	/*
