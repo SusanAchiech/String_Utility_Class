@@ -247,9 +247,27 @@ public:
 	}
 
 private:
-	/*
-	* Put your internal data structures and members here
-	*/
+	String& Append(const String& str, size_t start, size_t count)
+	{
+		char* temp = new char[s_length + count + 1];
+
+		std::strcpy(temp, s_data);
+
+		std::strncat(temp, str.s_data + start, count);
+
+		temp[s_length + count] = '\0';
+
+		delete[] s_data;
+
+		s_data = temp;
+
+		s_length += count;
+
+		return *this;
+	}
+
+	char* s_data;
+	size_t s_length;
 };
 
 #endif

@@ -2,6 +2,8 @@
 //
 
 #include <iostream>
+#include <string.cpp>
+#include <String.h>
 
 int main()
 {
