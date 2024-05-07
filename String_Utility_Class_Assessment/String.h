@@ -5,7 +5,7 @@
 class String
 {
 public:
-	
+
 	String();
 	String(const char* _str);
 	String(const String& other);
@@ -44,9 +44,9 @@ public:
 	const char& operator[](size_t _index) const;
 
 private:
-/*
-* Put your internal data structures and members here
-*/
+	String& Append(const String& str, size_t start, size_t count);
+	char* s_data;
+	size_t s_length;
 };
 
 #endif

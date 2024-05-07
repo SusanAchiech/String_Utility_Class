@@ -1,43 +1,35 @@
-#include <String.h>
 #include <iostream>
+#include <cstring>
+#include "String.h"
 
-#pragma once
-#ifndef CUSTOM_STRING_HEADER
-#define CUSTOM_STRING_HEADER
-
-class String
-{
-public:
 	//initiatizing string and setting it to zero
-	String() : s_data(new char[1] {'\0'}), s_length(0) {}
+	String::String() : s_data(new char[1] {'\0'}), s_length(0) {}
 
 	//
-	String(const char* _str) {
+	String::String(const char* str) {
 		s_length = std::strlen(str);
 		s_data = new char[s_length + 1];
 		//copying input string
 		std::strcpy(s_data, str);
 	}
 
-	String(const String& other) {
+	String::String(const String& other) {
 		s_length = other.s_length;
 		s_data = new char[s_length + 1];
 		std::strcpy(s_data, other.s_data);
 	}
 
-	~String() {
+	String::~String() {
 		//dellocating memory used
-		delete s_data;
+		delete[] s_data;
 	}
-
-public:
 	//returning the length of the string stored
-	size_t Length() const {
+	size_t String::Length() const {
 		return s_length;
 	}
 
 	//returning index of character in string
-	char& CharacterAt(size_t _index)
+	char& String::CharacterAt(size_t index)
 	{
 		//checking if the index is out of bounds
 		if (index >= 0 && index < s_length)
@@ -48,25 +40,25 @@ public:
 	}
 
 	//returning the index of the chtracter in the string 
-	const char& CharacterAt(size_t _index) const
+	const char& String::CharacterAt(size_t index) const
 	{
 		//checking if the index is valid
 		if (index >= 0 && index < s_length)
 		{
-			return s_data[index]
+			return s_data[index];
 		}
 		//if out of bounds then return 0
 		return s_data[0];
 	}
 
 	//comparing the two string objects
-	bool EqualTo(const String& _other) const
+	bool String::EqualTo(const String& other) const
 	{
 		return std::strcmp(s_data, other.s_data) == 0;
 	}
 
 	//appending the string data from str to current string
-	String& Append(const String& str) {
+	String& String::Append(const String& str) {
 		//creating a new character
 		char* temp = new char[s_length + str.s_length + 1];
 		//copying the current string data into temp
@@ -82,29 +74,29 @@ public:
 		//returning the modified string
 		return *this;
 	}
-	String& Prepend(const String& _str)
+	String& String::Prepend(const String& str)
 	{
 		//creating a new character
-		char* temp = new char[m_length + str.m_length + 1];
+		char* temp = new char[s_length + str.s_length + 1];
 		//copying the str data into temp
-		std::strcpy(temp, str.m_data);
+		std::strcpy(temp, str.s_data);
 		//updating s_data to reflect new length
-		std::strcat(temp, m_data);
+		std::strcat(temp, s_data);
 		//creating a new character
-		delete[] m_data;
+		delete[] s_data;
 		//updating s_data to reflect new length
-		m_data = temp;
+		s_data = temp;
 		//updating s_data to reflect new length
-		m_length += str.m_length;
+		s_length += str.s_length;
 		//returning the modified string
 		return *this;
 	}
 
-	const char* CStr() const {
-		return m_data;
+	const char* String::CStr() const {
+		return s_data;
 	}
 	//converting all characters in the string to lowercase
-	String& ToLower()
+	String& String::ToLower()
 	{
 		for (size_t i = 0; i < s_length; i++)
 		{
@@ -114,7 +106,7 @@ public:
 	}
 
 	//converting all characters in the string to uppercase
-	String& ToUpper()
+	String& String::ToUpper()
 	{
 		{
 			for (size_t i = 0; i < s_length; i++)
@@ -126,7 +118,7 @@ public:
 	}
 
 	//searching for the first occurence of the string
-	size_t Find(const String& str) 
+	size_t String::Find(const String& str) 
 		{
 
 		char* found = std::strstr(s_data, str.s_data);
@@ -142,7 +134,7 @@ public:
 
 	//searching for the first occurence of str within the string object
 
-	size_t Find(size_t startIndex, const String& str) 
+	size_t String::Find(size_t startIndex, const String& str) 
 	{
 		if (startIndex >= s_length) 
 		{
@@ -158,7 +150,7 @@ public:
 		return -1;
 	}
 
-	String& Replace(const String& find, const String& replace)
+	String& String::Replace(const String& find, const String& replace)
 	{
 		size_t pos = 0;
 		//creating a new string
@@ -173,7 +165,7 @@ public:
 				result.Append(*this, pos, s_length - pos);
 				break;
 			}
-			//appending the r5elace string and updating the position
+			//appending the replace string and updating the position
 			result.Append(*this, pos, foundPos - pos);
 			
 			result.Append(replace);
@@ -185,7 +177,7 @@ public:
 		return *this;
 	}
 
-	String& ReadFromConsole()
+	String& String::ReadFromConsole()
 	{
 		//reading to line 1023
 		char buffer[1024];
@@ -198,28 +190,27 @@ public:
 
 	}
 
-	String& WriteToConsole() 
+	String& String::WriteToConsole() 
 	{
 		//allowing input into the console
-		std::cout << m_data << std::endl;
+		std::cout << s_data << std::endl;
 
 		return *this;
 	}
-public:
 	//comparing the current string with the other string
-	bool operator==(const String& other) 
+	bool String::operator==(const String& other) 
 	
 	{
 		return EqualTo(other);
 	}
 
 	//returning the opposite of EqualTo()
-	bool operator!=(const String& other) 
+	bool String::operator!=(const String& other) 
 	{
 		return !EqualTo(other);
 	}
 
-	String& operator=(const String& str)
+	String& String::operator=(const String& str)
 	{
 		//checking if this and str are not the same object
 		if (this != &str) 
@@ -236,18 +227,17 @@ public:
 	}
 
 	//returning const reference to the character
-	char& operator[](size_t index)
+	char& String::operator[](size_t index)
 	{
 		return CharacterAt(index);
 	}
 
-	const char& operator[](size_t index) const
+	const char& String::operator[](size_t index) const
 	{
 		return CharacterAt(index);
 	}
 
-private:
-	String& Append(const String& str, size_t start, size_t count)
+	String& String::Append(const String& str, size_t start, size_t count)
 	{
 		char* temp = new char[s_length + count + 1];
 
@@ -265,9 +255,3 @@ private:
 
 		return *this;
 	}
-
-	char* s_data;
-	size_t s_length;
-};
-
-#endif
