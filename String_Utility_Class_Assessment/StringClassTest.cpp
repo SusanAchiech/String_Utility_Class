@@ -56,11 +56,17 @@ void StringClassTest::Run()
 	PrintResult(message, str1, "Welcome to Turkana");
 
 	//ToLower test
-
 	message = "ToLower Test";
 	str1 = "WELCOME TO TURKANA";
 	str1.ToLower();
 	PrintResult(message, str1, "Welcome to Turkana");
+
+	//EqualTo test
+	message = "EqualTo Test";
+	str1 = "Welcome to Turkana";
+	str1.EqualTo("WELCOME TO TURKANA");
+	PrintResult(message, str1, "Welcome to Turkana");
+
 }
 
 void StringClassTest::PrintResult(String& message, String& result, const char* expected)
