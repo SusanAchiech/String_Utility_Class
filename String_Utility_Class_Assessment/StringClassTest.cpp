@@ -49,6 +49,18 @@ void StringClassTest::Run()
 	str1.Find("Susan");
 	PrintResult(message, str1, "Hello Susan");
 
+	//ToUper test
+	message = "ToUpper Test";
+	str1 = "Welcome to Turkana";
+	str1.ToUpper();
+	PrintResult(message, str1, "Welcome to Turkana");
+
+	//ToLower test
+
+	message = "ToLower Test";
+	str1 = "WELCOME TO TURKANA";
+	str1.ToLower();
+	PrintResult(message, str1, "Welcome to Turkana");
 }
 
 void StringClassTest::PrintResult(String& message, String& result, const char* expected)
