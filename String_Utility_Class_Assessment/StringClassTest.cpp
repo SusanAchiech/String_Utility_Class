@@ -23,7 +23,13 @@ void StringClassTest::Run()
 {
 	PrintTestHeader();
 
-	String message = "";
+	String message = "Append Test";
+	String str1 = "Hello";
+	str1.Append("World");
+	
+	PrintResult(message, str1, "Hello World!");
+
+	
 }
 
 void StringClassTest::PrintResult(String& message, String& result, const char* expected)
@@ -38,7 +44,7 @@ void StringClassTest::PrintResult(String& message, String& result, const char* e
 	{
 		std::cout << " FAILED" << std::endl;
 		std::cout << "Expected: " << expected << std::endl;
-		std::cout << "Got: " << result << std::endl;
+		std::cout << "Got: " <<  result << std::endl;
 		results.push_back(false);
 	}
 }
