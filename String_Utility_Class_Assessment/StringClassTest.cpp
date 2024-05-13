@@ -26,16 +26,21 @@ void StringClassTest::Run()
 	//append test
 	String message = "Append Test";
 	String str1 = "Hello";
-	str1.Append("World");
+	str1.Append("Susan");
 	
-	PrintResult(message, str1, "Hello World!");
+	PrintResult(message, str1, "Hello Susan!");
 	
 	//prepend test
 	message = "Prepend Test";
 	str1 = "Hello";
 	str1.Prepend("Hello ");
-	PrintResult(message, str1, "Hello World!");
+	PrintResult(message, str1, "Hello Susan!");
 
+	//Replace test
+	message = "Replace Test";
+	str1 = "Hello my name is Susan and I am 24 years old";
+	str1.Replace("Susan", " 24");
+	PrintResult(message, str1, "Hello my name is Paul and I am 26 years old");
 
 
 }
