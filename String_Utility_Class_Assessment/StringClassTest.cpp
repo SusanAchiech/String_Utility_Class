@@ -11,6 +11,7 @@ StringClassTest::~StringClassTest()
 
 }
 
+//print date and time to the console
 void StringClassTest::PrintTestHeader()
 {
 	std::cout << "String Test\n"
@@ -42,11 +43,17 @@ void StringClassTest::Run()
 	str1.Replace("Susan", " 24");
 	PrintResult(message, str1, "Hello my name is Paul and I am 26 years old");
 
+	//Find test
+	message = "Find Test";
+	str1 = "Hello Susan";
+	str1.Find("Susan");
+	PrintResult(message, str1, "Hello Susan");
 
 }
 
 void StringClassTest::PrintResult(String& message, String& result, const char* expected)
 {
+	//writing to console test
 	message.WriteToConsole();
 	if (CheckString(result, expected))
 	{
