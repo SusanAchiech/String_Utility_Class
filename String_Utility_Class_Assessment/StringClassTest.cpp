@@ -23,13 +23,21 @@ void StringClassTest::Run()
 {
 	PrintTestHeader();
 
+	//append test
 	String message = "Append Test";
 	String str1 = "Hello";
 	str1.Append("World");
 	
 	PrintResult(message, str1, "Hello World!");
-
 	
+	//prepend test
+	message = "Prepend Test";
+	str1 = "Hello";
+	str1.Prepend("Hello ");
+	PrintResult(message, str1, "Hello World!");
+
+
+
 }
 
 void StringClassTest::PrintResult(String& message, String& result, const char* expected)
