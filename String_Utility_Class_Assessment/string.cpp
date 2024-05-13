@@ -28,6 +28,7 @@
 		return s_length;
 	}
 
+
 	//returning index of character in string
 	char& String::CharacterAt(size_t index)
 	{
