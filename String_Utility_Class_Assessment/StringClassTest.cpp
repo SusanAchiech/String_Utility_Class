@@ -67,6 +67,14 @@ void StringClassTest::Run()
 	str1.EqualTo("WELCOME TO TURKANA");
 	PrintResult(message, str1, "Welcome to Turkana");
 
+	// CharacterAt test
+	message = "CharacterAt Test";
+	str1 = "Welcome to Turkana";
+	char expectedChar = 'o';
+	char actualChar = str1.CharacterAt(4);
+	PrintResult(message, str1, "Welcome to Turkana");
+
+
 }
 
 void StringClassTest::PrintResult(String& message, String& result, const char* expected)
