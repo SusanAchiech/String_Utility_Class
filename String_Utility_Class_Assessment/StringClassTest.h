@@ -19,8 +19,4 @@ private:
 
 };
 
-bool StringClassTest::CheckString(String& str, const char* expected)
-{
-	return str == (String)expected;
-}
 

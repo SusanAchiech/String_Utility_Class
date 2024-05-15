@@ -11,6 +11,12 @@ StringClassTest::~StringClassTest()
 
 }
 
+
+bool StringClassTest::CheckString(String& str, const char* expected)
+{
+	return str == (String)expected;
+}
+
 //print date and time to the console
 void StringClassTest::PrintTestHeader()
 {
@@ -29,18 +35,19 @@ void StringClassTest::Run()
 	String str1 = "Hello";
 	str1.Append("Susan");
 	
-	PrintResult(message, str1, "Hello Susan!");
+	PrintResult(message, str1, "HelloSusan");
 	
 	//prepend test
 	message = "Prepend Test";
 	str1 = "Hello";
 	str1.Prepend("Hello ");
-	PrintResult(message, str1, "Hello Susan!");
+	PrintResult(message, str1, "Hello Hello");
 
 	//Replace test
 	message = "Replace Test";
 	str1 = "Hello my name is Susan and I am 24 years old";
-	str1.Replace("Susan", " 24");
+	str1.Replace("Susan", "Paul");
+	str1.Replace("24", "26");
 	PrintResult(message, str1, "Hello my name is Paul and I am 26 years old");
 
 	//Find test
@@ -53,13 +60,13 @@ void StringClassTest::Run()
 	message = "ToUpper Test";
 	str1 = "Welcome to Turkana";
 	str1.ToUpper();
-	PrintResult(message, str1, "Welcome to Turkana");
+	PrintResult(message, str1, "WELCOME TO TURKANA");
 
 	//ToLower test
 	message = "ToLower Test";
 	str1 = "WELCOME TO TURKANA";
 	str1.ToLower();
-	PrintResult(message, str1, "Welcome to Turkana");
+	PrintResult(message, str1, "welcome to turkana");
 
 	//EqualTo test
 	message = "EqualTo Test";
@@ -90,11 +97,12 @@ void StringClassTest::PrintResult(String& message, String& result, const char* e
 	{
 		std::cout << " FAILED" << std::endl;
 		std::cout << "Expected: " << expected << std::endl;
-		std::cout << "Got: " <<  result << std::endl;
+		std::cout << "Got: " <<  result.CStr() << std::endl;
 		results.push_back(false);
 	}
 }
 
+//checking for the status percentage of the project
 void StringClassTest::PrintPassFailRate()
 {
 	int passed = 0;

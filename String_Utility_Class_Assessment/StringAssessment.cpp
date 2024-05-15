@@ -2,16 +2,12 @@
 //
 
 #include <iostream>
-#include "String.h"
+#include "StringClassTest.h"
 
 int main()
 {
-    String str1("Hello, ");
-    String str2("World");
-    str1.Append(str2);
-
-    str1.WriteToConsole();
-
+    StringClassTest sct;
+    sct.Run();
     return 0;
 
 
