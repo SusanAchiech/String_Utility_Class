@@ -1,6 +1,7 @@
 #pragma once
 #include "String.h"
 #include  <vector>
+
 class StringClassTest
 {
 public:
@@ -14,6 +15,7 @@ private:
 	void PrintResult(String& message, String& result, const char* expected);
 	bool CheckString(String& str, const char* expected);
 	void PrintPassFailRate();
+	void SaveToFile(String& ouutputText);
 
 	std::vector<bool> results;
 

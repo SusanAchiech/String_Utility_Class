@@ -1,5 +1,6 @@
 #include "StringClassTest.h"
 #include <iostream>
+#include <fstream>
 
 StringClassTest::StringClassTest()
 {
@@ -20,8 +21,8 @@ bool StringClassTest::CheckString(String& str, const char* expected)
 //print date and time to the console
 void StringClassTest::PrintTestHeader()
 {
-	std::cout << "String Test\n"
-		<< "-----------\n"
+	std::cout << "StringTest\n"
+		<< "---------\n"
 		<< "Date: " << __DATE__
 		<< " Time: " << __TIME__ << std::endl << std::endl;
 }
@@ -29,6 +30,13 @@ void StringClassTest::PrintTestHeader()
 void StringClassTest::Run()
 {
 	PrintTestHeader();
+
+	String fileHeader = String("String Test\n-----------\nDate: ");
+	fileHeader.Append(__DATE__);
+	fileHeader.Append(" Time: ");
+	fileHeader.Append(__TIME__);
+	fileHeader.Append("\n\n");
+	SaveToFile(fileHeader);
 
 	//append test
 	String message = "Append Test";
@@ -90,11 +98,17 @@ void StringClassTest::PrintResult(String& message, String& result, const char* e
 	message.WriteToConsole();
 	if (CheckString(result, expected))
 	{
+		String outputText(message);
+		outputText.Append(" PASSED\n");
+		SaveToFile(outputText);
 		std::cout << " PASSED" << std::endl;
 		results.push_back(true);
 	}
 	else
 	{
+		String outputText(message);
+		outputText.Append(" FAILED\n");
+		SaveToFile(outputText);
 		std::cout << " FAILED" << std::endl;
 		std::cout << "Expected: " << expected << std::endl;
 		std::cout << "Got: " <<  result.CStr() << std::endl;
@@ -116,4 +130,13 @@ void StringClassTest::PrintPassFailRate()
 	std::cout << "\nPassed: " << passed
 		<< " Failed: " << results.size() - passed
 		<< " Failed Rate: " << (results.size() - passed) / (float)results.size() * 100 << "%\n";
+}
+
+void StringClassTest::SaveToFile(String& outputText)
+{
+	//saving to file
+	std::ofstream file;
+	file.open("StringTestResults.txt", std::ios::app);
+	file << outputText.CStr();
+	file.close();
 }
