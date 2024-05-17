@@ -32,6 +32,7 @@ void StringClassTest::Run()
 	PrintTestHeader();
 
 	String fileHeader = String("String Test\n-----------\nDate: ");
+	//printing the date and time to the text file
 	fileHeader.Append(__DATE__);
 	fileHeader.Append(" Time: ");
 	fileHeader.Append(__TIME__);
@@ -136,6 +137,7 @@ void StringClassTest::SaveToFile(String& outputText)
 {
 	//saving to file
 	std::ofstream file;
+	//creating and opening StringTestResults.txt file
 	file.open("StringTestResults.txt", std::ios::app);
 	file << outputText.CStr();
 	file.close();
