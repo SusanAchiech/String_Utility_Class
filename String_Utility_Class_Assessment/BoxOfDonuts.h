@@ -6,8 +6,22 @@ class BoxOfDonuts : public Item
 public:
 	BoxOfDonuts();
 	~BoxOfDonuts();
-	void Use() override;
-	void Description() override;
+	void Description() override
+	{
+		//checking the number of donuts left
+		if (donuts > 0)
+		{
+			std::cout << "This box of donuts has " << donuts << "left.\n";
+		}
+		else
+		{
+			std::cout << "The box is empty.\n",
+		}
+	}
+	void Use() override
+	{
+
+	}
 private:
 	int donuts;
 };

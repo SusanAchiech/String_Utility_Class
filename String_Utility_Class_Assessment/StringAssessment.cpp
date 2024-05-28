@@ -6,15 +6,10 @@
 
 int main()
 {
-    StringClassTest sct;
-    sct.Run();
-    return 0;
+    
 
 
-    /*std::string countryStr;
-    std::string helloStr;
-    std::string worldStr;
-
+   
 
 
     std::cout << "Hello World!\n";*/
