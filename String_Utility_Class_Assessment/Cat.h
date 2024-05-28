@@ -1,11 +1,13 @@
 #pragma once
 #include "Item.h"
-#include "Cat.h"
 #include <iostream>
 class Cat: public Item
 {
 public:
-	Cat(): purring(false)
+	Cat() : purring(false)
+	{
+	}
+
 	~Cat();
 
 	void Use() 

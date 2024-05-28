@@ -2,6 +2,7 @@
 #include <vector>
 #include "String.h"
 #include <iostream>
+#include "spell.h"
 class Player
 {
 public:

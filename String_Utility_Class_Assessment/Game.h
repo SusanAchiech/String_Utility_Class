@@ -1,12 +1,13 @@
 #pragma once
 #include "Room.h"
 #include "Player.h"
+#include "Item.h"
 #include <map>
 #include <iostream>
 #include "BoxOfDonuts.h"
 #include "Lamp.h"
 #include "Cat.h"
-#include "Item.h"
+#include "spell.h"
 
 
 class Game {

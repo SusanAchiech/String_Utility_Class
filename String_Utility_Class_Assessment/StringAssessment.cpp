@@ -2,17 +2,14 @@
 //
 
 #include <iostream>
-#include "StringClassTest.h"
+#include "game.h"
 
 int main()
 {
-    
+    Game game;
+    game.Run();
 
-
-   
-
-
-    std::cout << "Hello World!\n";*/
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
