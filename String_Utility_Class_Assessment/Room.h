@@ -18,9 +18,10 @@ public:
 			std::cout << "You see a " << Item->description() << " here." << std::endl;
 		}
 	}
+	Item* Item;
 private: 
 	//returning the item pointer
-	Item* Item;
+	
 	String description;
 
 };
