@@ -4,10 +4,10 @@
 #include <map>
 #include <iostream>
 #include "BoxOfDonuts.h"
-#include "MysteryBox.h"
-#include "BookLibrary.h"
-#include "RecipeBook.h"
-#include "VirtualClass.h"
+#include "Lamp.h"
+#include "Cat.h"
+#include "Item.h"
+
 
 class Game {
 public:
@@ -62,15 +62,15 @@ private:
     //initializing rooms
     void initializeRooms() {
         
-        rooms["start"] = new Room("You are in the starting room.", new BoxOfDonuts());
+        rooms["start"] = new Room("You are in the starting room.");
         
-        rooms["north"] = new Room("You are in the northern room.", new VirtualClass());
+        rooms["north"] = new Room("You are in the northern room.", new BoxOfDonuts());
         
-        rooms["south"] = new Room("You are in the southern room.", new RecipeBook());
+        rooms["south"] = new Room("You are in the southern room.", new Lamp());
         
-        rooms["east"] = new Room("You are in the eastern room.", new BookLibrary());
+        rooms["east"] = new Room("You are in the eastern room.", new Cat());
         
-        rooms["west"] = new Room("You are in the western room.", new MysteryBox());
+        rooms["west"] = new Room("You are in the western room.");
 
         exits["start"] = { {"north", "north"}, {"south", "south"}, {"east", "east"}, {"west", "west"} };
         exits["north"] = { {"south", "start"} };
@@ -93,9 +93,9 @@ private:
     }
 
     void useItem() {
-        Item* item = currentRoom->Item();
-        if (item) {
-            item->Use();
+        Item* Item = currentRoom->Item();
+        if (Item) {
+            Item->Use();
         }
         else {
             std::cout << "There is no item to use in this room.\n";
