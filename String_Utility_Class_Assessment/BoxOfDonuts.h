@@ -1,7 +1,7 @@
 #pragma once
 #include "Item.h"
 
-class BoxOfDonuts: public Item 
+class BoxOfDonuts : public Item
 {
 public:
 	BoxOfDonuts();
@@ -10,4 +10,4 @@ public:
 	void Description() override;
 private:
 	int donuts;
-}
+};
