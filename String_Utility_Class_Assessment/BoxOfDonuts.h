@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.h"
+#include <iostream>
 
 class BoxOfDonuts : public Item
 {
@@ -15,7 +16,7 @@ public:
 		}
 		else
 		{
-			std::cout << "The box is empty.\n",
+			std::cout << "The box is empty.\n";
 		}
 	}
 	void Use() override
