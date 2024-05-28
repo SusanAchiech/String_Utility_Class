@@ -3,6 +3,7 @@
 #include "String.h"
 #include <iostream>
 #include "spell.h"
+#include <algorithm>
 class Player
 {
 public:
@@ -10,8 +11,10 @@ public:
 	{
 		//creating  an array of spell names
 		spells = { "Eclipse", "Frostbite", "Levitate", "Mirage", "Petrify", "Teleport", "Thunderwave", "Vortext" };
+		//
+		std::sort(spells.begin(), spells.end());
 	}
-	~Player();
+	~Player() {}
 	//performing a binary function to check the spells
 	bool FindSpell(String spellName)
 	{
