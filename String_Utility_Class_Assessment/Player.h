@@ -2,38 +2,16 @@
 #include <vector>
 #include "String.h"
 #include <iostream>
-#include "spell.h"
 #include <algorithm>
+#include "spell.h"
+
 class Player
 {
 public:
-	Player()
-	{
-		//creating  an array of spell names
-		spells = { "Eclipse", "Frostbite", "Levitate", "Mirage", "Petrify", "Teleport", "Thunderwave", "Vortext" };
-		//
-		std::sort(spells.begin(), spells.end());
-	}
-	~Player() {}
-	//performing a binary function to check the spells
-	bool FindSpell(String spellName)
-	{
-		auto it = std::lower_bound(spells.begin(), spells.end(), spell);
-
-		//checking if the player knows the spell
-		if (it != spells.end() && *it == spell)
-		{
-			std::cout << "'You know the spell '" << spell.getString() << std::endl;
-			return true;
-		}
-		else
-		{
-			std::cout << "'You do not know the spell '" << spell.getString() << std::endl;
-			return false;
-		}
-	}
+    Player();
+    ~Player();
+    bool FindSpell(String spellName);
 
 private:
-	std::vector<String> spells;
+    std::vector<String> spells;
 };
-
