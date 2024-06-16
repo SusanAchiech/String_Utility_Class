@@ -1,25 +1,31 @@
-#include "Room.h"
+#pragma once
+#include "Item.h"
+#include "String.h"
 #include <iostream>
 
-// Constructor definition
-Room::Room(const String& description, Item* item)
-    : description(description), item(item) {}
+class Room : public Item {
+public:
+    Room(const String& description, Item* item = nullptr)
+        : description(description), item(item) {}
 
-// Destructor definition
-Room::~Room() {
-    delete item;
-}
+    ~Room() {}
 
-// Description method definition
-void Room::Description() {
-    std::cout << description << std::endl;
-    // Checking the description of the item in the room
-    if (item) {
-        std::cout << "You see a " << item->Description() << " here." << std::endl;
+    void Room::Description() {
+        std::cout << roomDescription << std::endl;
+        // Checking the description of the item in the room
+        if (item) {
+            std::cout << "You see a " << item->description() << " here." << std::endl;
+        }
+
+    std::string description() const override {
+        return description.getString();
     }
-}
 
-// GetItem method definition
-Item* Room::GetItem() const {
-    return item;
-}
+    Item* getItem() const {
+        return item;
+    }
+
+private:
+    String description;
+    Item* item;
+};

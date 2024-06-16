@@ -1,36 +1,35 @@
-#include "BoxOfDonuts.h"
+#pragma once
+#include "Item.h"
+#include <iostream>
 
-// Constructor definition
-BoxOfDonuts::BoxOfDonuts() : donuts(12) {}
+class BoxOfDonuts : public Item {
+public:
+    BoxOfDonuts() : donuts(12) {} // Assuming a box starts with 12 donuts
+    ~BoxOfDonuts() {}
 
-// Destructor definition
-BoxOfDonuts::~BoxOfDonuts() {}
+    void Use() override {
+        if (donuts > 0) {
+            donuts--;
+            std::cout << "You eat a donut. " << donuts << " donuts left.\n";
+        }
+        else {
+            std::cout << "The box is empty.\n";
+        }
+    }
 
-// Description method definition
-void BoxOfDonuts::Description()
-{
-    // Checking the number of donuts left
-    if (donuts > 0)
-    {
-        std::cout << "This box of donuts has " << donuts << " left.\n";
+    void Description() override {
+        if (donuts > 0) {
+            std::cout << "This box of donuts has " << donuts << " left.\n";
+        }
+        else {
+            std::cout << "The box is empty.\n";
+        }
     }
-    else
-    {
-        std::cout << "The box is empty.\n";
-    }
-}
 
-// Use method definition
-void BoxOfDonuts::Use()
-{
-    // Checking if the remaining number of donuts have been eaten
-    if (donuts > 0)
-    {
-        donuts--;
-        std::cout << "The remaining " << donuts << " donuts have been eaten.\n";
+    std::string description() const override {
+        return "box of donuts";
     }
-    else
-    {
-        std::cout << "You cannot eat what you do not have!\n";
-    }
-}
+
+private:
+    int donuts;
+};

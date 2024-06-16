@@ -1,31 +1,38 @@
-#include "Lamp.h"
+#pragma once
+#include "Item.h"
+#include <iostream>
 
-// Constructor definition
-Lamp::Lamp() : isOn(false) {}
+class Lamp : public Item {
+public:
+    Lamp() : isOn(false) {}
+    ~Lamp() {}
 
-// Destructor definition
-Lamp::~Lamp() {}
+    void Use() override {
+        if (isOn) {
+            std::cout << "You turn off the lamp and there is darkness." << std::endl;
+            isOn = false;
+        }
+        else {
+            std::cout << "You turn on the lamp and there is light." << std::endl;
+            isOn = true;
+        }
+    }
 
-// Use method definition
-void Lamp::Use() {
-    if (isOn) {
-        std::cout << "You turn off the lamp and there is darkness." << std::endl;
-        isOn = false;
+    void Description() override {
+        std::string desc = "A glass lamp";
+        if (isOn) {
+            desc += " that is turned on";
+        }
+        else {
+            desc += " that is turned off";
+        }
+        std::cout << desc << std::endl;
     }
-    else {
-        std::cout << "You turn on the lamp and there is light." << std::endl;
-        isOn = true;
-    }
-}
 
-// Description method definition
-void Lamp::Description() {
-    std::string desc = "A glass lamp";
-    if (isOn) {
-        desc += " that is turned on";
+    std::string description() const override {
+        return "glass lamp";
     }
-    else {
-        desc += " that is turned off";
-    }
-    std::cout << desc << std::endl;
-}
+
+private:
+    bool isOn;
+};

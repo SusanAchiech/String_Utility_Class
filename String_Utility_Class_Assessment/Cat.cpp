@@ -1,37 +1,38 @@
-#include "cat.h"
+#pragma once
+#include "Item.h"
+#include <iostream>
 
-// Constructor definition
-Cat::Cat() : purring(false) {}
+class Cat : public Item {
+public:
+    Cat() : purring(false) {}
+    ~Cat() {}
 
-// Destructor definition
-Cat::~Cat() {}
+    void Use() override {
+        if (purring) {
+            std::cout << "You stop petting the cat." << std::endl;
+            purring = false;
+        }
+        else {
+            std::cout << "You start petting the cat and it purrs." << std::endl;
+            purring = true;
+        }
+    }
 
-// Use method definition
-void Cat::Use()
-{
-    if (purring)
-    {
-        std::cout << "You stop petting the cat." << std::endl;
-        purring = false;
+    void Description() override {
+        std::string desc = "A white spotted cat";
+        if (purring) {
+            desc += " that is purring";
+        }
+        else {
+            desc += " that is not purring";
+        }
+        std::cout << desc << std::endl;
     }
-    else
-    {
-        std::cout << "You start petting the cat and it purrs" << std::endl;
-        purring = true;
-    }
-}
 
-// Description method definition
-void Cat::Description()
-{
-    std::string desc = "A white spotted cat";
-    if (purring)
-    {
-        desc += " that is purring";
+    std::string description() const override {
+        return "white spotted cat";
     }
-    else
-    {
-        desc += " that is not purring";
-    }
-    std::cout << desc << std::endl;
-}
+
+private:
+    bool purring;
+};

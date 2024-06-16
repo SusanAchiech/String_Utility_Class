@@ -5,19 +5,12 @@
 class Spell
 {
 public:
-	//initializing name as empty and damage to 0
-	Spell(): name(""), damage(0){}
-	~Spell(){}
-		void Cast();
-	{
-		std::cout << "You cast " << name.getString() << " dealing" << damage << " damage!" << std::endl;
-	}
-	bool Compare(const Spell& a, const Spell& b) const
-	{
-		return a.name < b.name;
-	}
+    Spell();
+    ~Spell();
+    void Cast() const;
+    bool Compare(const Spell& a, const Spell& b) const;
 
 private:
-	String name;
-	int damage;
+    String name;
+    int damage;
 };

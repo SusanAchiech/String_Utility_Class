@@ -3,15 +3,21 @@
 #include "String.h"
 #include <iostream>
 
-class Room : public Item
-{
+class Room {
 public:
-    Room(const String& description, Item* item = nullptr);
+    // Initializing the item descriptions in the room
+    Room(const String& roomDescription, Item* item = nullptr)
+        : roomDescription(roomDescription), item(item) {}
+
     ~Room();
+
     void Description();
-    Item* GetItem() const;
+
+    Item* getItem() const {
+        return item;
+    }
 
 private:
-    String description;
+    String roomDescription; // Renamed to avoid conflict
     Item* item;
 };
