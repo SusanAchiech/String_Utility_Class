@@ -5,19 +5,13 @@
 
 class Room {
 public:
-    // Initializing the item descriptions in the room
-    Room(const String& roomDescription, Item* item = nullptr)
-        : roomDescription(roomDescription), item(item) {}
-
+    Room(const String& roomDescription, Item* item = nullptr);
     ~Room();
 
     void Description();
-
-    Item* getItem() const {
-        return item;
-    }
+    Item* getItem() const;
 
 private:
-    String roomDescription; // Renamed to avoid conflict
+    String roomDescription;
     Item* item;
 };

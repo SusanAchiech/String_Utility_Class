@@ -2,8 +2,7 @@
 #include "String.h"
 #include <iostream>
 
-class Spell
-{
+class Spell {
 public:
     Spell();
     ~Spell();

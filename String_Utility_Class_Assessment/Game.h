@@ -10,6 +10,8 @@
 #include "spell.h"
 
 class Game {
+    static std::map<std::string, std::map<std::string, std::string>> exits;
+    static std::map<std::string, Room*> rooms;
 public:
     Game();
     ~Game();
@@ -23,6 +25,4 @@ private:
 
     Room* currentRoom;
     Player* player;
-    std::map<std::string, Room*> rooms;
-    std::map<std::string, std::map<std::string, std::string>> exits;
 };

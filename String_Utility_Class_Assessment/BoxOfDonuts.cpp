@@ -1,35 +1,28 @@
-#pragma once
-#include "Item.h"
-#include <iostream>
+#include "BoxOfDonuts.h"
 
-class BoxOfDonuts : public Item {
-public:
-    BoxOfDonuts() : donuts(12) {} // Assuming a box starts with 12 donuts
-    ~BoxOfDonuts() {}
+BoxOfDonuts::BoxOfDonuts() : donuts(12) {}
 
-    void Use() override {
-        if (donuts > 0) {
-            donuts--;
-            std::cout << "You eat a donut. " << donuts << " donuts left.\n";
-        }
-        else {
-            std::cout << "The box is empty.\n";
-        }
+BoxOfDonuts::~BoxOfDonuts() {}
+
+void BoxOfDonuts::Use() {
+    if (donuts > 0) {
+        donuts--;
+        std::cout << "You eat a donut. " << donuts << " donuts left.\n";
     }
-
-    void Description() override {
-        if (donuts > 0) {
-            std::cout << "This box of donuts has " << donuts << " left.\n";
-        }
-        else {
-            std::cout << "The box is empty.\n";
-        }
+    else {
+        std::cout << "The box is empty.\n";
     }
+}
 
-    std::string description() const override {
-        return "box of donuts";
+void BoxOfDonuts::Description() {
+    if (donuts > 0) {
+        std::cout << "This box of donuts has " << donuts << " left.\n";
     }
+    else {
+        std::cout << "The box is empty.\n";
+    }
+}
 
-private:
-    int donuts;
-};
+std::string BoxOfDonuts::description() const {
+    return "box of donuts";
+}

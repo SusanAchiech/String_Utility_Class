@@ -1,31 +1,15 @@
-#pragma once
+#include "Room.h"
 #include "Item.h"
-#include "String.h"
 #include <iostream>
 
-class Room : public Item {
-public:
-    Room(const String& description, Item* item = nullptr)
-        : description(description), item(item) {}
+Room::Room(const String& roomDescription, Item* item)
+    : roomDescription(roomDescription), item(item) {}
 
-    ~Room() {}
+Room::~Room() {}
 
-    void Room::Description() {
-        std::cout << roomDescription << std::endl;
-        // Checking the description of the item in the room
-        if (item) {
-            std::cout << "You see a " << item->description() << " here." << std::endl;
-        }
-
-    std::string description() const override {
-        return description.getString();
+void Room::Description() {
+    std::cout << roomDescription.CStr() << std::endl;
+    if (item) {
+        std::cout << "You see a " << item->description() << " here." << std::endl;
     }
-
-    Item* getItem() const {
-        return item;
-    }
-
-private:
-    String description;
-    Item* item;
-};
+}

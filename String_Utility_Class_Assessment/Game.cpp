@@ -1,105 +1,82 @@
-#pragma once
-#include "Room.h"
-#include "Player.h"
-#include "Item.h"
-#include <map>
+#include "Game.h"
 #include <iostream>
-#include "BoxOfDonuts.h"
-#include "Lamp.h"
-#include "Cat.h"
-#include "Spell.h"
+#include <map>
+#include <string>
 
-class Game {
-public:
-    Game() {
-        initializeRooms();
-        player = new Player();
-        currentRoom = rooms["start"];
+// Defining static data members
+std::map<std::string, std::map<std::string, std::string>> Game::exits;
+std::map<std::string, Room*> Game::rooms;
+
+Game::Game() : currentRoom(nullptr), player(new Player()) {
+    initializeRooms();
+    currentRoom = rooms["start"];
+}
+
+Game::~Game() {
+    delete player;
+    for (auto& roomPair : rooms) {
+        delete roomPair.second;
     }
+}
 
-    ~Game() {
-        delete player;
-        for (auto& roomPair : rooms) {
-            delete roomPair.second;
+void Game::initializeRooms() {
+    // Create and link example rooms
+    rooms["start"] = new Room("You are in a dimly lit room. There is a door to the north.");
+    rooms["north"] = new Room("You are in a dusty corridor. The walls are lined with old paintings.");
+    rooms["south"] = new Room("You are in a small library. Books line the walls.");
+    rooms["east"] = new Room("You are in a grand hall. A chandelier hangs from the ceiling.");
+    rooms["west"] = new Room("You are in a garden. Flowers bloom all around you.");
+
+    // Link the rooms
+    exits["start"]["north"] = "north";
+    exits["start"]["south"] = "south";
+    exits["start"]["east"] = "east";
+    exits["start"]["west"] = "west";
+
+    exits["north"]["south"] = "start";
+    exits["south"]["north"] = "start";
+    exits["east"]["west"] = "start";
+    exits["west"]["east"] = "start";
+}
+
+void Game::Run() {
+    std::cout << "Welcome to the Text Adventure Game!\n";
+    while (true) {
+        currentRoom->Description();
+        std::cout << "Enter a command: ";
+        std::string command;
+        std::getline(std::cin, command);
+
+        if (command == "quit") {
+            std::cout << "Quitting. Thanks for playing!\n";
+            break;
         }
-    }
-
-    void Run() {
-        std::cout << "Welcome to the Text Adventure Game!\n";
-        while (true) {
-            currentRoom->Description();
-            std::cout << "Enter a command: ";
-            String command;
-            command.ReadFromConsole().ToLower();
-
-            if (command.EqualTo("quit")) {
-                std::cout << "Quitting too soon. Thanks for Playing!\n";
-                break;
-            }
-            else if (command.EqualTo("move north") || command.EqualTo("move south") ||
-                command.EqualTo("move east") || command.EqualTo("move west")) {
-                move(command);
-            }
-            else if (command.EqualTo("use item")) {
-                useItem();
-            }
-            else if (command.Find("spell ") == 0) {
-                String spells = command.Replace("spell ", "");
-                player->FindSpell(spells);
-            }
-            else {
-                std::cout << "Spell not found.\n";
-            }
-        }
-    }
-
-private:
-    void initializeRooms() {
-        rooms["start"] = new Room("You are in the starting room.");
-        rooms["north"] = new Room("You are in the northern room.", new BoxOfDonuts());
-        rooms["south"] = new Room("You are in the southern room.", new Lamp());
-        rooms["east"] = new Room("You are in the eastern room.", new Cat());
-        rooms["west"] = new Room("You are in the western room.");
-
-        exits["start"] = { {"north", "north"}, {"south", "south"}, {"east", "east"}, {"west", "west"} };
-        exits["north"] = { {"south", "start"} };
-        exits["south"] = { {"north", "start"} };
-        exits["east"] = { {"west", "start"} };
-        exits["west"] = { {"east", "start"} };
-    }
-
-    void move(const String& movement) {
-        String dir = movement.Replace("move ", "");
-        auto it = exits[currentRoomDesc()].find(dir.getString());
-        if (it != exits[currentRoomDesc()].end()) {
-            currentRoom = rooms[it->second];
+        else if (command.substr(0, 5) == "move ") {
+            String direction(command.substr(5).c_str());
+            move(direction);
         }
         else {
-            std::cout << "You can't move in that direction.\n";
+            std::cout << "Invalid command. Try again.\n";
         }
     }
+}
 
-    void useItem() {
-        Item* item = currentRoom->getItem();
-        if (item) {
-            item->Use();
-        }
-        else {
-            std::cout << "There is no item to use in this room.\n";
+void Game::move(const String& direction) {
+    std::string currentRoomDescription = currentRoomDesc().substr();
+    auto it = exits[currentRoomDescription].find(direction.CStr());
+    if (it != exits[currentRoomDescription].end()) {
+        currentRoom = rooms[it->second];
+    }
+    else {
+        std::cout << "You can't move in that direction.\n";
+    }
+}
+
+std::string Game::currentRoomDesc() const {
+    for (const auto& pair : rooms) {
+        if (pair.second == currentRoom) {
+            return pair.first;
         }
     }
-
-    std::string currentRoomDesc() const {
-        for (const auto& pair : rooms) {
-            if (pair.second == currentRoom) {
-                return pair.first;
-            }
-        }
-        return "";
-    }
-
-    Room* currentRoom;
-    Player* player;
-    std::map<std::string, Room*> rooms;
-    std::map<std::string, std::map<std::string, std::string>> exits;
-};
+    return "";
+}

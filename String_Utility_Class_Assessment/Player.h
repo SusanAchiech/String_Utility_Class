@@ -5,8 +5,7 @@
 #include <algorithm>
 #include "spell.h"
 
-class Player
-{
+class Player {
 public:
     Player();
     ~Player();
