@@ -34,6 +34,9 @@ public:
     char& operator[](size_t _index);
     const char& operator[](size_t _index) const;
 
+    // Non-member Function
+    friend std::ostream& operator<<(std::ostream& os, const String& str);
+
 private:
     // Helper Functions
     String& Append(const String& str, size_t start, size_t count);
@@ -42,5 +45,6 @@ private:
     size_t s_length;
 };
 
-// Non-member Function
-std::ostream& operator<<(std::ostream& os, const String& str);
+
+
+
